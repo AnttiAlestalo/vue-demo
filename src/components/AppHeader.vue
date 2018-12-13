@@ -5,18 +5,28 @@
             <span class="cssAppLogo"><img alt="Vue" src="../assets/logo.png"></span>
             <div class="cssSiteTitle">AA Vue Demo App</div>
             <div class="cssTopNav">
-                <router-link :to="{name: 'Home'}" exact>Home</router-link>
-                <router-link :to="{name: 'Customers'}">Customers</router-link>
-                <router-link :to="{name: 'Reports'}">Reports</router-link>
+                <router-link :to="{name: 'Home'}" exact>{{ $t("lang.home") }}</router-link>
+                <router-link :to="{name: 'Customers'}">{{ $t("lang.customers") }}</router-link>
+                <router-link :to="{name: 'Reports'}">{{ $t("lang.reports") }}</router-link>
             </div>
-            <font-awesome-icon icon="cog" class="cssSettings" />
+            <font-awesome-icon icon="cog" v-popover:foo class="cssSettings" />
+            <popover name="foo">
+                <div>Select language:</div>
+                <div class="cssLang" @click="jsChangeLang('en')">English</div>
+                <div class="cssLang" @click="jsChangeLang('fi')">Finnish</div>
+            </popover>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "AppHeader"
+        name: "AppHeader",
+        methods: {
+            jsChangeLang(strLang) {
+                this.$root.$root._i18n.locale = strLang;
+            }
+        }
     }
 </script>
 
@@ -93,5 +103,22 @@
         float: right;
         margin-top: 9px;
         margin-right: 20px;
+        cursor: pointer;
+    }
+    .vue-popover {
+        position: static !important;
+        float: right;
+        margin-top: 30px;
+        border: solid 1px #ccc;
+    }
+    .vue-popover div {
+        padding: 4px 8px;
+    }
+    .cssLang {
+        border-top: solid 1px #ccc;
+        cursor: pointer;
+    }
+    .cssLang:hover {
+        background-color: #DBEAFF;
     }
 </style>

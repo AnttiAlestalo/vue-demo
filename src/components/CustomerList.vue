@@ -1,32 +1,32 @@
 <template>
     <table id="idCustomersTable" class="cssTable">
         <caption>
-            Customers <span class="cssSmall">({{(aCustomers ? aCustomers.length : '0')}})</span>
+            {{ $t("lang.customers") }} <span class="cssSmall">({{(aCustomers ? aCustomers.length : '0')}})</span>
             <input type="text" placeholder="Search" v-model="strSearchQuery" />
-            <button type="button" class="cssButDef" @click="jsEditCustomer('0')">Add new</button>
+            <button type="button" class="cssButDef" @click="jsEditCustomer('0')">{{ $t("lang.addnew") }}</button>
         </caption>
         <thead>
         <tr>
-            <th @click="jsSortBy('fName')">Name
+            <th @click="jsSortBy('fName')">{{ $t("lang.name") }}
                 <font-awesome-icon icon="arrow-down" class="cssSortIcon" v-if="strSortBy === 'fName' && !bSortDes"/>
                 <font-awesome-icon icon="arrow-up" class="cssSortIcon" v-if="strSortBy === 'fName' && bSortDes"/>
             </th>
-            <th @click="jsSortBy('fEmail')">Email
+            <th @click="jsSortBy('fEmail')">{{ $t("lang.email") }}
                 <font-awesome-icon icon="arrow-down" class="cssSortIcon" v-if="strSortBy === 'fEmail' && !bSortDes"/>
                 <font-awesome-icon icon="arrow-up" class="cssSortIcon" v-if="strSortBy === 'fEmail' && bSortDes"/>
             </th>
-            <th @click="jsSortBy('fPhone')">Phone number
+            <th @click="jsSortBy('fPhone')">{{ $t("lang.phone") }}
                 <font-awesome-icon icon="arrow-down" class="cssSortIcon" v-if="strSortBy === 'fPhone' && !bSortDes"/>
                 <font-awesome-icon icon="arrow-up" class="cssSortIcon" v-if="strSortBy === 'fPhone' && bSortDes"/>
             </th>
-            <th @click="jsSortBy('fCountry')">Country
+            <th @click="jsSortBy('fCountry')">{{ $t("lang.country") }}
                 <font-awesome-icon icon="arrow-down" class="cssSortIcon" v-if="strSortBy === 'fCountry' && !bSortDes"/>
                 <font-awesome-icon icon="arrow-up" class="cssSortIcon" v-if="strSortBy === 'fCountry' && bSortDes"/>
             </th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="jsonCustomer in aCustomers"
+        <tr v-for="jsonCustomer in aCustomers" :key="jsonCustomer.id"
             v-if="strSearchQuery.length < 2 || jsonCustomer.fName.toLowerCase().indexOf(strSearchQuery.toLowerCase()) > -1 || jsonCustomer.fEmail.toLowerCase().indexOf(strSearchQuery.toLowerCase()) > -1 || jsonCustomer.fPhone.toLowerCase().indexOf(strSearchQuery.toLowerCase()) > -1 || jsonCustomer.fCountry.toLowerCase().indexOf(strSearchQuery.toLowerCase()) > -1"
             @click='jsReadCustomer(jsonCustomer.id)'>
             <td>{{jsonCustomer.fName}}</td>
@@ -68,12 +68,14 @@
             },
             jsReadCustomer(strId) {
                 this.$router.push('/customers/read/' + strId)
+            },
+            jsEditCustomer(strId) {
+                this.$router.push('/customers/edit/' + strId)
             }
         },
         created () {
-            const strUrl = window.location.href.indexOf('localhost') > 0 ? 'api/customers.json' : 'http://www.aad.fi/aad/react1.nsf/vwCustomers?OpenView';
-            axios
-                .get(strUrl)
+            const strUrl = window.location.href.indexOf('localhost') > 0 ? 'api/customers.json' : 'http://www.aad.fi/aad/react1.nsf/vwCustomers?OpenView&' + Date.now();
+            axios.get(strUrl)
                 .then(response => (
                     this.jsUpdateCustomers(response.data)
                 ))

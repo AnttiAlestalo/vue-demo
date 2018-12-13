@@ -78,9 +78,6 @@ export default {
     border-top: solid 1px #999;
     border-bottom: solid 1px #999;
   }
-  .cssSortIcon {
-    margin-left: 8px;
-  }
   .cssTable tbody tr:hover {
     background-color: #DBEAFF;
   }
@@ -151,8 +148,7 @@ export default {
     height: 70px;
   }
   .cssDate {
-    width: 120px !important;
-    border: solid 1px #aaa !important;
+    width: 140px !important;
   }
   .cssDivRadio {
     border: solid 1px #fff;
@@ -172,19 +168,15 @@ export default {
   }
   div.cssInvalid {
     border-radius: 4px;
+    padding: 4px 0;
   }
   .cssInvalid {
     border: solid 1px #d43f3a !important;
     background-color: rgba(236, 88, 64, 0.1);
   }
-  .cssFormButtons {
-    display: inline-block;
-    text-align: right;
+  .mx-input, .v-select .selected-tag {
+    color: #000 !important;
   }
-  .cssFormButtons button {
-    margin-left: 12px;
-  }
-
   @media only screen and (max-width: 800px) {
     .cssAppBody {
       padding: 80px 20px 20px 20px;

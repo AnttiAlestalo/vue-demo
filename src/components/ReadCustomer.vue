@@ -1,23 +1,23 @@
 <template>
     <div>
     <div class="cssPageHeader">
-        Customer <span><button type="button" class="cssButDef" @click="jsEditCustomer(jsonCustomer.id)">Edit</button></span>
+        {{ $t("lang.customer") }} <span><button type="button" class="cssButDef" @click="jsEditCustomer(jsonCustomer.id)">{{ $t("lang.edit") }}</button></span>
     </div>
     <div class="cssPageBody">
         <fieldset id="idFormCustomer" v-if="jsonCustomer">
-            <div class="cssFormRow"><div>First name:</div><div>{{jsonCustomer.fFirstName}}</div></div>
-            <div class="cssFormRow"><div>Last name:</div><div>{{jsonCustomer.fLastName}}</div></div>
-            <div class="cssFormRow"><div>Gender:</div><div>{{jsonCustomer.fGender}}</div></div>
-            <div class="cssFormRow"><div>Company:</div><div>{{jsonCustomer.fCompany}}</div></div>
-            <div class="cssFormRow"><div>Street address:</div><div>{{jsonCustomer.fStreetAddress}}</div></div>
-            <div class="cssFormRow"><div>Post code:</div><div>{{jsonCustomer.fPostCode}}</div></div>
-            <div class="cssFormRow"><div>City:</div><div>{{jsonCustomer.fCity}}</div></div>
-            <div class="cssFormRow"><div>Country:</div><div>{{jsonCustomer.fCountry}}</div></div>
-            <div class="cssFormRow"><div>Email address:</div><div>{{jsonCustomer.fEmail}}</div></div>
-            <div class="cssFormRow"><div>Phone number:</div><div>{{jsonCustomer.fPhone}}</div></div>
-            <div class="cssFormRow"><div>Last contacted:</div><div>{{jsonCustomer.fContactDate}}</div></div>
-            <div class="cssFormRow"><div>Customer id:</div><div>{{jsonCustomer.fCustomerId}}</div></div>
-            <div class="cssFormRow"><div>Additional info:</div><div>{{jsonCustomer.fAddInfo}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.firstname") }}:</div><div>{{jsonCustomer.fFirstName}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.lastname") }}:</div><div>{{jsonCustomer.fLastName}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.gender") }}:</div><div>{{jsonCustomer.fGender}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.company") }}:</div><div>{{jsonCustomer.fCompany}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.address") }}:</div><div>{{jsonCustomer.fStreetAddress}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.postcode") }}:</div><div>{{jsonCustomer.fPostCode}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.city") }}:</div><div>{{jsonCustomer.fCity}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.country") }}:</div><div>{{jsonCustomer.fCountry}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.email") }}:</div><div>{{jsonCustomer.fEmail}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.phone") }}:</div><div>{{jsonCustomer.fPhone}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.lastcontacted") }}:</div><div>{{jsonCustomer.fContactDate}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.customerid") }}:</div><div>{{jsonCustomer.fCustomerId}}</div></div>
+            <div class="cssFormRow"><div>{{ $t("lang.additionalinfo") }}:</div><div>{{jsonCustomer.fAddInfo}}</div></div>
         </fieldset>
     </div>
     </div>
@@ -40,7 +40,7 @@
         },
         created () {
             const strId = this.$route.params.id;
-            const strUrl = window.location.href.indexOf('localhost') > 0 ? 'api/123.json' : 'http://www.aad.fi/aad/react1.nsf/vwCustomer/' + strId + '?OpenDocument';
+            const strUrl = window.location.href.indexOf('localhost') > 0 ? 'api/123.json' : 'http://www.aad.fi/aad/react1.nsf/vwCustomer/' + strId + '?OpenDocument&' + Date.now();
             axios
                 .get(strUrl)
                 .then(response => (this.jsonCustomer = response.data))
