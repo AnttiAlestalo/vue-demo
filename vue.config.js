@@ -1,3 +1,3 @@
 module.exports = {
-    // baseUrl: "/aad/vue/"
+    baseUrl: "/aad/vue/"
 };
