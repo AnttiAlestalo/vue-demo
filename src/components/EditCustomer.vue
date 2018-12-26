@@ -131,8 +131,8 @@
                 if (window.location.href.indexOf('localhost') < 0 && this.aInvalidFields.length === 0) {
                     const strUrl = this.jsonCustomer.id === "" ? "http://www.aad.fi/aad/react1.nsf/frmCustomer?CreateDocument" : "http://www.aad.fi/aad/react1.nsf/0/" + this.jsonCustomer.id + "?SaveDocument";
                     const jsonCustomer = this.jsonCustomer;
-                    const strUrlParams = Object.keys(this.jsonCustomer).map(function(k) {
-                        const strVal = (k === "fContactDate" && jsonCustomer[k] !== "" ? this.jsLeft(jsonCustomer[k].toISOString(), 10) : jsonCustomer[k]);
+                    const strUrlParams = Object.keys(this.jsonCustomer).map((k) => {
+                        const strVal = (k === "fContactDate" && (typeof jsonCustomer[k]) !== "string"  ? this.jsLeft(jsonCustomer[k].toISOString(), 10) : jsonCustomer[k]);
                         return encodeURIComponent(k) + '=' + encodeURIComponent(strVal)
                     }).join('&');
                     axios.post(strUrl, strUrlParams)
